@@ -22,11 +22,24 @@ public class ResourceContentService {
         return resourceContentRepository.findById(id);
     }
 
-    public ResourceContent save(ResourceContent resource) {
-        return resourceContentRepository.save(resource);
+    public ResourceContent save(ResourceContent resourceContent) {
+        return resourceContentRepository.save(resourceContent);
     }
 
     public void deleteById(Long id) {
         resourceContentRepository.deleteById(id);
+    }
+
+    // <-- Agrega este método:
+    public ResourceContent update(Long id, ResourceContent updatedResource) {
+        return resourceContentRepository.findById(id)
+            .map(existing -> {
+                existing.setResourceName(updatedResource.getResourceName());
+                existing.setResourceType(updatedResource.getResourceType());
+                existing.setUrl(updatedResource.getUrl());
+                existing.setContent(updatedResource.getContent());
+                return resourceContentRepository.save(existing);
+            })
+            .orElseThrow(() -> new RuntimeException("ResourceContent not found with id: " + id));
     }
 }

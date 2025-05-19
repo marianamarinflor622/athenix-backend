@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ContentRepository extends JpaRepository<Content, Long> {
-    // Aquí puedes añadir consultas personalizadas si lo necesitas más adelante
+
 }
