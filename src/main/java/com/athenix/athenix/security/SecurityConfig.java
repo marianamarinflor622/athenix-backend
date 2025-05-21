@@ -1,5 +1,6 @@
 package com.athenix.athenix.security;
 
+import io.github.cdimascio.dotenv.Dotenv;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -14,12 +15,19 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class SecurityConfig {
 
+    // Carga el archivo .env de la raíz del proyecto
+    private static final Dotenv dotenv = Dotenv.load();
+
     @Bean
     public InMemoryUserDetailsManager userDetailsService(PasswordEncoder encoder) {
-        UserDetails admin = User.withUsername("Mariana")
-            .password(encoder.encode("Olga2013"))
-            .roles("ADMIN")
-            .build();
+        String username = dotenv.get("SECURITY_USER_NAME");
+        String password = dotenv.get("SECURITY_USER_PASSWORD");
+
+        UserDetails admin = User.withUsername(username)
+                .password(encoder.encode(password))
+                .roles("ADMIN")
+                .build();
+
         return new InMemoryUserDetailsManager(admin);
     }
 
@@ -31,12 +39,11 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-            .csrf(csrf -> csrf.disable())  // Deshabilitar CSRF
-            .authorizeHttpRequests(auth -> auth.anyRequest().authenticated())  // Cualquier petición requiere autenticación
-            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))  // Stateless
-            .httpBasic(httpBasic -> {});  // Configura HTTP Basic auth sin usar el método deprecated
+            .csrf(csrf -> csrf.disable())                // Deshabilitar CSRF
+            .authorizeHttpRequests(auth -> auth.anyRequest().authenticated())
+            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+            .httpBasic(httpBasic -> {});                 // Autenticación HTTP Basic
 
         return http.build();
     }
 }
-

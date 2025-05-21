@@ -22,8 +22,7 @@ public class AthenixApplication {
         System.setProperty("DB_URL", dotenv.get("DB_URL", ""));
         System.setProperty("DB_USER", dotenv.get("DB_USER", ""));
         System.setProperty("DB_PASS", dotenv.get("DB_PASS", ""));
-        System.setProperty("JWT_SECRET_KEY", dotenv.get("JWT_SECRET_KEY", ""));
-        System.setProperty("spring.application.name", dotenv.get("SPRING_APPLICATION_NAME", "loopinback"));
+        System.setProperty("spring.application.name", dotenv.get("SPRING_APPLICATION_NAME", "athenix"));
 
         String activeProfile = dotenv.get("SPRING_PROFILES_ACTIVE");
         if (activeProfile != null && !activeProfile.isBlank()) {
