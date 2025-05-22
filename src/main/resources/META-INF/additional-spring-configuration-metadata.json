@@ -13,5 +13,10 @@
     "name": "DB_PASS",
     "type": "java.lang.String",
     "description": "A description for 'DB_PASS'"
+  },
+  {
+    "name": "file.upload-dir",
+    "type": "java.lang.String",
+    "description": "A description for 'file.upload-dir'"
   }
 ]}

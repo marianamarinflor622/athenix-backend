@@ -1,11 +1,13 @@
 package com.athenix.athenix;
 
+import com.athenix.athenix.config.FileStorageProperties;
+import io.github.cdimascio.dotenv.Dotenv;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import io.github.cdimascio.dotenv.Dotenv;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
 @SpringBootApplication
+@EnableConfigurationProperties(FileStorageProperties.class)
 public class AthenixApplication {
     public static final String DB_URL = "DB_URL";
     public static final String DB_USER = "DB_USER";
@@ -24,11 +26,7 @@ public class AthenixApplication {
         System.setProperty("DB_PASS", dotenv.get("DB_PASS", ""));
         System.setProperty("spring.application.name", dotenv.get("SPRING_APPLICATION_NAME", "athenix"));
 
-        String activeProfile = dotenv.get("SPRING_PROFILES_ACTIVE");
-        if (activeProfile != null && !activeProfile.isBlank()) {
-            System.setProperty("spring.profiles.active", activeProfile);
-        }
-
+      
         SpringApplication.run(AthenixApplication.class, args);
     }
 }
