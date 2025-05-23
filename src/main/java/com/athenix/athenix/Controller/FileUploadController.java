@@ -1,4 +1,4 @@
-package com.athenix.athenix.controller;
+package com.athenix.athenix.Controller;
 
 import com.athenix.athenix.service.FileStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
