@@ -2,6 +2,7 @@ package com.athenix.athenix.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Data
@@ -17,7 +18,7 @@ public class ResourceContent {
     private String title;
 
     private String type; 
-    
+
     private String description;
 
     private String resourceName; 
@@ -25,7 +26,9 @@ public class ResourceContent {
     private String resourceType; 
 
     private String url; 
-    @ManyToOne(fetch = FetchType.LAZY)
+
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "content_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Content content;
 }
