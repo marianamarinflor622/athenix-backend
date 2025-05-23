@@ -1,4 +1,4 @@
-package com.athenix.athenix.controller;
+package com.athenix.athenix.Controller;
 
 import com.athenix.athenix.model.Comment;
 import com.athenix.athenix.service.CommentService;
