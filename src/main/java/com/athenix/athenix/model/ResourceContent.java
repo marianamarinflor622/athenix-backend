@@ -14,11 +14,18 @@ public class ResourceContent {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String resourceName;
+    private String title;
 
-    private String resourceType; // por ejemplo: "image", "video", "document"
+    private String type; // tipo lógico: "Web" o "Lab" (del frontend)
 
-    private String url;
+    @Column(length = 1000)
+    private String description;
+
+    private String resourceName; // nombre real del archivo en disco
+
+    private String resourceType; // tipo físico: image, video, etc.
+
+    private String url; // ruta para descargar
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "content_id")
