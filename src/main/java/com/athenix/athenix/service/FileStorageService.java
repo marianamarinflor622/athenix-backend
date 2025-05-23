@@ -20,14 +20,14 @@ public class FileStorageService {
                 .normalize();
 
         try {
-            Files.createDirectories(this.fileStorageLocation);  // crea la carpeta uploads si no existe
+            Files.createDirectories(this.fileStorageLocation);  
         } catch (Exception ex) {
             throw new FileStorageException("No se pudo crear el directorio donde se guardarán los archivos.", ex);
         }
     }
 
     public String storeFile(MultipartFile file) {
-        // Normalizar nombre archivo
+    
         String originalFileName = file.getOriginalFilename();
         if (originalFileName == null) {
             throw new FileStorageException("El archivo no tiene un nombre válido.");
@@ -35,12 +35,12 @@ public class FileStorageService {
         String fileName = StringUtils.cleanPath(originalFileName);
 
         try {
-            // Verificar que el nombre de archivo no contenga caracteres inválidos
+            
             if (fileName.contains("..")) {
                 throw new FileStorageException("Nombre de archivo inválido: " + fileName);
             }
 
-            // Copiar archivo a la carpeta uploads (sobrescribe si existe)
+          
             Path targetLocation = this.fileStorageLocation.resolve(fileName);
             Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
 

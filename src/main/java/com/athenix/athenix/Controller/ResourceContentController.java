@@ -23,7 +23,7 @@ public class ResourceContentController {
     @Autowired
     private ResourceContentService resourceService;
 
-    // Directorio base para guardar archivos, configurado en application.properties
+    
     @org.springframework.beans.factory.annotation.Value("${file.upload-dir}")
     private String uploadDir;
 
@@ -61,7 +61,7 @@ public class ResourceContentController {
         return ResponseEntity.noContent().build();
     }
 
-    // Nuevo endpoint para subir archivos (imágenes, etc)
+   
     @PostMapping("/upload")
     public ResponseEntity<?> uploadFile(@RequestParam("file") MultipartFile file,
                                         @RequestParam("contentId") Long contentId,
@@ -96,7 +96,7 @@ public class ResourceContentController {
         }
     }
 
-    // Endpoint para descargar archivos
+   
     @GetMapping("/download/{filename:.+}")
     public ResponseEntity<Resource> downloadFile(@PathVariable String filename) {
         try {

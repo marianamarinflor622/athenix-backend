@@ -40,13 +40,13 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
             .csrf(csrf -> csrf.disable())
-            .cors(cors -> cors.disable()) // ✅ Activar CORS
+            .cors(cors -> cors.disable()) 
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll() // ✅ Permitir preflight
+                .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll() 
                 .anyRequest().authenticated()
             )
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-            .httpBasic(httpBasic -> {}); // Autenticación HTTP Basic
+            .httpBasic(httpBasic -> {}); 
 
         return http.build();
     }

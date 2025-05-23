@@ -16,17 +16,15 @@ public class ResourceContent {
 
     private String title;
 
-    private String type; // tipo lógico: "Web" o "Lab" (del frontend)
-
-    @Column(length = 1000)
+    private String type; 
+    
     private String description;
 
-    private String resourceName; // nombre real del archivo en disco
+    private String resourceName; 
 
-    private String resourceType; // tipo físico: image, video, etc.
+    private String resourceType; 
 
-    private String url; // ruta para descargar
-
+    private String url; 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "content_id")
     private Content content;
